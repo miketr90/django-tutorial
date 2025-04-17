@@ -5,16 +5,15 @@ We will be leveraging Python and a web framework called [Django](https://www.dja
 
 ## Installing Django
 First we need to install the django framework for Python using the terminal in the bottom of VSCode
-```
+``` sh
 pip install django
 ```
 
 ## Create the Django Project
 We need to create a project directory
-```
+``` sh
 cd Desktop
 mkdir django-tutorial
-cd django-tutorial
 django-admin startproject mysite django-tutorial
 ```
 
@@ -49,7 +48,11 @@ Let's take a look at what each of these files is doing:
 
 ## Testing our Application
 We are now ready to start our web application for the first time!
-```
+If you do not have an active terminal, click on the Terminal menu (you may need to click the ...) --> New Terminal
+![Create a Terminal](./images/create-terminal.png)
+
+Run the following command to start the server (you may need to re-run this if your server crashes)
+``` python
 python manage.py runserver 8080
 ```
 This will start the Django's built-in server now open your preferred browser and navigate to this address http://127.0.0.1:8080/ 
@@ -64,7 +67,7 @@ We will create a basic home page for our application to open using simple HTML.
 
    ![Home HTML file](./images/home-html.png)
 3. Inside the file, add the following code
-   ```
+   ``` html
    <!-- home.html -->
    <!DOCTYPE html>
    <html>
@@ -79,35 +82,42 @@ We will create a basic home page for our application to open using simple HTML.
 4. In order for to load our web pages, we need to tell it where our web pages are located. Open *settings.py*
 
    a. At the very top of the file add the following code to access the operating system module
-      ```
+      ``` python
       import os
       ```
    b. Scroll down to the TEMPLATES block. Find the DIRS section add the following code setting the path to our templates folder
-     ```
+     ``` python
       os.path.join(BASE_DIR,'mysite','templates')
      ```
      The code should look like this:
 
       ![Django Templates](./images/django-settings-template.png)
 5. Now we need to setup where the page will load from. Navigate to the *urls.py* file.
-6. In the urlpatterns, add the following path:
+6. At the top, add the following import:
+   ``` python
+   from . import views
    ```
+7. In the urlpatterns, add the following path:
+   ``` python
    path('', views.home)
    ```
-7. Finally we need to create a homepage view. Navigate to the *views.py* file.
-8. Delete all the existing code and replace with:
-   ```
+   urls.py should look like this:
+
+   ![urls.py code](./images/urlspy-code.png)
+8. Finally we need to create a homepage view. Create a *views.py* file in the mysite folder
+9. Add the following code:
+   ``` python
    from django.shortcuts import render
    
    
    def home(request):
        return render(request, 'home.html')
    ```
-9. Refresh the web browser and we should have our basic home page working!
-   ]![Home HTML file](./images/home-webpage1.png)
+10. Refresh the web browser and we should have our basic home page working!
+   ![Home HTML file](./images/home-webpage1.png)
 
 
-##Customizing our site!
+## Customizing our site!
 The basic site is working, but it looks a little boring. Lets add a picture!
 1. Like the templates, we will need a place to store our images for our website. Inside the mysite folder, create a folder called *static*
 2. Inside the static folder, create a folder called *img* (short for images)
@@ -116,17 +126,17 @@ The basic site is working, but it looks a little boring. Lets add a picture!
    ![Nationwide Logo](./images/static-img-nationwide.png)
 4. Again, we need to tell Django where to look for images we want to include on our page. Go back to *settings.py*
 5. Scroll down to the bottom to find the Static Files section. We currently have a STATIC_URL path defined. We need to add a STATICFILES_DIRS telling Django where the images are. Add the following code:
-   ```
+   ``` python
    STATICFILES_DIRS = [BASE_DIR / "mysite/static",]
    ```
       ![Django Settings - Static Code](./images/django-settings-static.png)
 6. Finally, we can add our image to our page! Return to your *home.html* page under templates.
    a. At the very top, we need to tell the page we are bring in static content. Add the following code:
-      ```
+      ``` python
       {% load static %}
       ```
    b. Below our welcome text, we are going to add the image code using our image file:
-      ```
+      ``` html
       <img src="{% static 'img/nw_logo.png' %}" alt="Logo" width="250" height="300">
       ```
    ![home.html Code](./images/html-image-code.png)
@@ -135,5 +145,7 @@ The basic site is working, but it looks a little boring. Lets add a picture!
    ![home page with image](./images/homepage-image-added.png)
 
 
-##Congratulations!!
+## Congratulations!!
 You now have a simple working webpage. From here on out, your options are endless. Perhaps add more pages, or continue customizing the existing page?
+
+You can find additional HTML resources at [W3 Schools](https://www.w3schools.com/html/default.asp)
