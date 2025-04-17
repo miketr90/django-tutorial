@@ -76,13 +76,26 @@ We will create a basic home page for our application to open using simple HTML.
    </body>
    </html>
    ```
-4. Now we need to setup where the page will load from. Navigate to the *urls.py* file.
-5. In the urlpatterns, add the following path:
+4. In order for to load our web pages, we need to tell it where our web pages are located. Open *settings.py*
+
+   a. At the very top of the file add the following code to access the operating system module
+      ```
+      import os
+      ```
+   b. Scroll down to the TEMPLATES block. Find the DIRS section add the following code setting the path to our templates folder
+     ```
+      os.path.join(BASE_DIR,'mysite','templates')
+     ```
+     The code should look like this:
+
+      ![Home HTML file](./images/django-settings-template.png)
+5. Now we need to setup where the page will load from. Navigate to the *urls.py* file.
+6. In the urlpatterns, add the following path:
    ```
    path('', views.home)
    ```
-6. Finally we need to create a homepage view. Navigate to the *views.py* file.
-7. Delete all the existing code and replace with:
+7. Finally we need to create a homepage view. Navigate to the *views.py* file.
+8. Delete all the existing code and replace with:
    ```
    from django.shortcuts import render
    
@@ -90,6 +103,6 @@ We will create a basic home page for our application to open using simple HTML.
    def home(request):
        return render(request, 'home.html')
    ```
-8. Refresh the web browser and we should have our basic home page working!
+9. Refresh the web browser and we should have our basic home page working!
    
    ![Home HTML file](./images/home-webpage1.png)
