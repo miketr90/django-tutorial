@@ -56,3 +56,40 @@ This will start the Django's built-in server now open your preferred browser and
 
 if everything went well you should see the default Django's welcome page.
 ![Default Website](./images/django-default.png)
+
+## Adding Our First Page!
+We will create a basic home page for our application to open using simple HTML.
+1. Inside the mysite folder, create a new folder called *templates*
+2. Inside the templates folder, create a new file called *home.html*
+
+   ![Home HTML file](./images/home-html.png)
+3. Inside the file, add the following code
+   ```
+   <!-- home.html -->
+   <!DOCTYPE html>
+   <html>
+   <head>
+       <title>Home Page</title>
+   </head>
+   <body>
+       <p>Welcome to our website!</p>
+   </body>
+   </html>
+   ```
+4. Now we need to setup where the page will load from. Navigate to the *urls.py* file.
+5. In the urlpatterns, add the following path:
+   ```
+   path('', views.home)
+   ```
+6. Finally we need to create a homepage view. Navigate to the *views.py* file.
+7. Delete all the existing code and replace with:
+   ```
+   from django.shortcuts import render
+   
+   
+   def home(request):
+       return render(request, 'home.html')
+   ```
+8. Refresh the web browser and we should have our basic home page working!
+   
+   ![Home HTML file](./images/home-webpage1.png)
