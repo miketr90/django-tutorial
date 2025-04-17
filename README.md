@@ -88,7 +88,7 @@ We will create a basic home page for our application to open using simple HTML.
      ```
      The code should look like this:
 
-      ![Home HTML file](./images/django-settings-template.png)
+      ![Django Templates](./images/django-settings-template.png)
 5. Now we need to setup where the page will load from. Navigate to the *urls.py* file.
 6. In the urlpatterns, add the following path:
    ```
@@ -104,5 +104,36 @@ We will create a basic home page for our application to open using simple HTML.
        return render(request, 'home.html')
    ```
 9. Refresh the web browser and we should have our basic home page working!
-   
-   ![Home HTML file](./images/home-webpage1.png)
+   ]![Home HTML file](./images/home-webpage1.png)
+
+
+##Customizing our site!
+The basic site is working, but it looks a little boring. Lets add a picture!
+1. Like the templates, we will need a place to store our images for our website. Inside the mysite folder, create a folder called *static*
+2. Inside the static folder, create a folder called *img* (short for images)
+3. Save your favorite picture inside of this folder using a simple file name (rename if necessary). For this example we used the Nationwide Logo.
+
+   ![Nationwide Logo](./images/static-img-nationwide.png)
+4. Again, we need to tell Django where to look for images we want to include on our page. Go back to *settings.py*
+5. Scroll down to the bottom to find the Static Files section. We currently have a STATIC_URL path defined. We need to add a STATICFILES_DIRS telling Django where the images are. Add the following code:
+   ```
+   STATICFILES_DIRS = [BASE_DIR / "mysite/static",]
+   ```
+      ![Django Settings - Static Code](./images/django-settings-static.png)
+6. Finally, we can add our image to our page! Return to your *home.html* page under templates.
+   a. At the very top, we need to tell the page we are bring in static content. Add the following code:
+      ```
+      {% load static %}
+      ```
+   b. Below our welcome text, we are going to add the image code using our image file:
+      ```
+      <img src="{% static 'img/nw_logo.png' %}" alt="Logo" width="250" height="300">
+      ```
+   ![home.html Code](./images/html-image-code.png)
+7. Refresh your webpage and you should have your new image showing up!
+
+   ![home page with image](./images/homepage-image-added.png)
+
+
+##Congratulations!!
+You now have a simple working webpage. From here on out, your options are endless. Perhaps add more pages, or continue customizing the existing page?
